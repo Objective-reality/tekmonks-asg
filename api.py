@@ -3,8 +3,7 @@ import urllib.request
 import re 
 
 
-app = Flask(__name__)
-@app.route('/getTimeStories', methods=['GET'])
+
 
 def getTimeStories():
 
@@ -52,6 +51,8 @@ def getTimeStories():
 	return jsonify(a_list)
 
 
+app = Flask(__name__)
+@app.route('/getTimeStories', methods=['GET'])
 
 def api():
   if request.method == 'GET':
