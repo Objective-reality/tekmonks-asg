@@ -10,10 +10,6 @@ the URL https://time.com/
 
 3. Navigate to the app.py for the main code.
 
-4. Languauges used: Python version 3.9.6
-
-5. To run it on a local machine, copy and paste the main code[line ] from app.py and execute the file. That should do the job. 
+4. Languauges used: Python version 3.9.6 
     
-
-
 Thanks for reading!
