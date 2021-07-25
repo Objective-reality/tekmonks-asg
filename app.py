@@ -1,6 +1,7 @@
-from flask import Flask,request,jsonify
-import urllib.request
-import re 
+from flask import Flask,request,jsonify                     # Flask was primarily used to host the app and create the API. 
+import urllib.request                                       # The library urllib was used to fetch the HTML from the url https://time.com/ and was 
+import re                                                   # taken as a string input. "re" module was used to manually parse the aforementioned
+							    # string.
 
 
 
