@@ -1,7 +1,7 @@
-from flask import Flask,request,jsonify                     # Flask was primarily used to host the app and create the API. 
-import urllib.request                                       # The library urllib was used to fetch the HTML from the url https://time.com/ and was 
-import re                                                   # taken as a string input. "re" module was used to manually parse the aforementioned
-							    # string.
+from flask import Flask,request,jsonify                     # Flask was primarily used to host the app and create the API. The library urllib was 
+import urllib.request                                       # used to fetch the HTML from the url https://time.com/ and was taken as a string.
+import re                                                   # "re" module was used to manually parse the aforementioned string.
+							    
 
 
 
@@ -13,15 +13,27 @@ def getTimeStories():
 
 	mystr = mybytes.decode("utf8")
 	fp.close()
+	
+# Since the instructions were NOT to use the libraries for directly
+# parsing HTML, we use regex module to manually parse the HTML file.
+# First we fetch the HTML from the URL as a string and then manipulate
+# it to retrieve "links" and "titles" from the 'Latest Stories' section.
 
 	ss = re.findall('Latest Stories(.+)</ol>', mystr, flags = re.DOTALL)
-	#print(ss)
 
-	#print(type(ss))
-	#print(type(mystr))
+# The above line gets us the chunk of a string that is present between 
+# "Latest Stories" and the nearest ending tag of <ol>(list tag).
+
+	
 	tt = re.findall('<h2.*?>(.+?)</a></h2>', str(ss), flags = re.DOTALL)
-	#print(tt)
+# The above line simplifies those chunks which contain our target elements,
+# "link" and "title".
 
+
+
+# In order to further refine these strings I have used these following loops and 
+# made a separate list for links and titles. Thus parsing the strings and storing 
+# them in new lists, new_links and new_titles, respectively.
 
 	link = []
 	title = []
@@ -41,6 +53,9 @@ def getTimeStories():
 	new_titles = []
 	for each_title in title:
 		new_titles.append(each_title.replace("\\",""))
+		
+# Now finally we combine the above two lists to make one json object. for that,
+# we use jsonify to create the desired JSON Object array with the 5 Latest stories.
 
 	a_list= []
 	for (i,j) in zip(new_titles,new_links):
@@ -54,6 +69,8 @@ def getTimeStories():
 
 app = Flask(__name__)
 @app.route('/getTimeStories', methods=['GET'])
+
+# Creating the API GET call. 
 
 def api():
   if request.method == 'GET':
